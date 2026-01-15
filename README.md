@@ -5,7 +5,34 @@
 
 A deterministic negotiation execution system designed for regulated healthcare environments.
 
-> **Note**: This is a reference implementation illustrating architectural principles. It omits production policy logic, cryptographic material, and regulatory configurations.
+> [!IMPORTANT]
+> This is a reference implementation illustrating architectural principles. It intentionally excludes production policy logic, cryptographic material, and regulatory configurations. 
+
+> [!NOTE]
+> This repository demonstrates execution guarantees, not procurement strategy.
+
+---
+
+## Intended Audiences
+
+This repository is structured to serve multiple stakeholders:
+
+- **Procurement & Compliance Leaders**
+  - Understand system guarantees, auditability, and dispute resolution.
+  - See `SYSTEM_PROMISE`, invariants, and audit replay semantics.
+- **Security & Platform Engineers**
+  - Review state machine determinism, WAL durability, and idempotency.
+  - Inspect property-based tests and threat model.
+- **Auditors & Regulators**
+  - Verify non-repudiation, immutable logs, and approval governance.
+  - Review formal invariants and replay reconstruction.
+- **Researchers / Architects**
+  - Study how formal methods bind to runtime enforcement.
+
+---
+
+> **New to formal methods or audit-grade systems?**  
+> Start with the [Glossary](docs/GLOSSARY.md) before reading the code.
 
 ---
 
@@ -43,36 +70,53 @@ Every offer, counter-offer, and acceptance is:
 
 ---
 
+## Explicit Non-Goals
+
+This system is intentionally NOT designed to:
+
+- Autonomously select vendors
+- Optimize pricing beyond human-defined bounds
+- Replace procurement authority
+- Bypass institutional approvals
+- Act without auditability
+
+Any system claiming these capabilities in regulated healthcare should be treated as high risk.
+
+---
+
+## Failure Behavior Summary
+
+| Scenario | System Behavior |
+|----------|-----------------|
+| Vendor disputes terms | Cryptographic audit log proves final agreement |
+| LLM proposes invalid terms | Proposal rejected, no state transition |
+| Approval service unavailable | Negotiation blocked unless governed override |
+| System crash mid-negotiation | WAL replay restores exact state |
+| Replay attack attempted | Duplicate transition rejected |
+
+---
+
+## Compliance Alignment (Illustrative)
+
+| Requirement | Mechanism |
+|-------------|-----------|
+| Non-repudiation | Signed, hash-chained audit log |
+| Change control | Policy version pinning |
+| Separation of duties | Human approval + override governance |
+| Audit replay | Dual execution modes |
+
+---
+
 ## Architecture Overview
 
-```
-┌─────────────────────────────────────────┐
-│         Policy Engine (Authority)        │
-│  - Economic bounds                       │
-│  - Regulatory compliance                 │
-│  - Approval requirements                 │
-└─────────────────────────────────────────┘
-                    ↓
-┌─────────────────────────────────────────┐
-│      State Machine (Deterministic)       │
-│  - Explicit transitions                  │
-│  - Invariant enforcement                 │
-│  - Terminal state absorption             │
-└─────────────────────────────────────────┘
-                    ↓
-┌─────────────────────────────────────────┐
-│       LLM Sandbox (Language Only)        │
-│  - No authority                          │
-│  - Proposal validation                   │
-│  - Redaction of sensitive data           │
-└─────────────────────────────────────────┘
-                    ↓
-┌─────────────────────────────────────────┐
-│    Audit Log (Cryptographically Chained) │
-│  - Merklized hash chain                  │
-│  - Replay verification                   │
-│  - Forensic reconstruction               │
-└─────────────────────────────────────────┘
+```mermaid
+graph TD
+    A[Policy Engine - Authority] --> B[State Machine - Deterministic]
+    B --> C[LLM Sandbox - Language Only]
+    B --> D[Audit Log - Cryptographically Chained]
+    A --- E[Economic Bounds]
+    A --- F[Regulatory Compliance]
+    A --- G[Approval Requirements]
 ```
 
 ---
@@ -120,6 +164,7 @@ See [tests/test_invariants.py](tests/test_invariants.py) for examples.
 
 ## Documentation
 
+- [GLOSSARY.md](docs/GLOSSARY.md) - Core terminology
 - [ARCHITECTURE.md](docs/ARCHITECTURE.md) - System design and component interaction
 - [THREAT_MODEL.md](docs/THREAT_MODEL.md) - Security considerations and mitigations
 - [INVARIANTS.md](docs/INVARIANTS.md) - Formal safety properties
@@ -133,17 +178,17 @@ See [tests/test_invariants.py](tests/test_invariants.py) for examples.
 # Install dependencies
 pip install -r requirements.txt
 
-# Run mocked simulation
+# Run deterministic demonstration simulation
 python simulate.py
 ```
 
-**Note**: The simulation uses synthetic data (fake policies, vendors, prices). It demonstrates flow, not production functionality.
+**Note**: The simulation uses synthetic policies, vendors, and prices. It demonstrates flow, not production functionality.
 
 ---
 
 ## What's NOT Included
 
-This public repository **omits**:
+This public repository **intentionally excludes**:
 
 - Production policy schemas
 - Economic bounds and reservation logic
@@ -158,19 +203,6 @@ These are commercial assets and remain private.
 
 ---
 
-## Use Cases
-
-### Compliance Audit
-Reconstruct historical negotiations with cryptographic proof of compliance.
-
-### Dispute Resolution
-Provide tamper-evident evidence of agreed terms.
-
-### System Recovery
-Replay negotiations from write-ahead log after crash.
-
----
-
 ## Technical Highlights
 
 - **Exactly-Once Semantics**: Idempotent transitions prevent duplicate commits
@@ -180,20 +212,9 @@ Replay negotiations from write-ahead log after crash.
 
 ---
 
-## Business Impact
-
-**Observed/Modeled**:
-- Material reduction in dispute-related write-offs
-- Fewer audit findings tied to procurement execution
-- Lower operational overhead during investigations
-
-**Primary Buying Trigger**: Post-dispute remediation (after settling a six-figure dispute due to lack of documentation).
-
----
-
 ## Contact
 
-**Author**: Nikos Vasilakis  
+**Author**: Nik. Kontopoulos  
 **Email**: sv1eex@hotmail.com  
 **GitHub**: https://github.com/z1000biker/pharmanegotiation
 
@@ -209,4 +230,4 @@ MIT License - See [LICENSE](LICENSE) for details.
 
 ## Disclaimer
 
-This repository is a reference implementation illustrating architectural principles for deterministic negotiation execution in regulated environments. It omits production policy logic, cryptographic material, and regulatory configurations. Use at your own risk.
+This repository is a reference implementation illustrating architectural principles for deterministic negotiation execution in regulated environments. It intentionally excludes production policy logic, cryptographic material, and regulatory configurations. Use at your own risk.
