@@ -1,0 +1,95 @@
+[
+    {
+        "event_id": "evt_0001",
+        "negotiation_id": "NEG-EXAMPLE-001",
+        "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "hash": "a7f3c9e2b1d4f8a6c5e9b2d7f1a3c8e4b6d9f2a5c7e1b4d8f3a6c9e2b5d7f1a3",
+        "timestamp": "2026-01-15T08:00:00Z",
+        "prev_state": "INIT",
+        "next_state": "CAPABILITY_DISCOVERY",
+        "event": "capability_request",
+        "transition_reason": "NORMAL",
+        "terms": {}
+    },
+    {
+        "event_id": "evt_0002",
+        "negotiation_id": "NEG-EXAMPLE-001",
+        "prev_hash": "a7f3c9e2b1d4f8a6c5e9b2d7f1a3c8e4b6d9f2a5c7e1b4d8f3a6c9e2b5d7f1a3",
+        "hash": "b8e4d0f3c2e5a9b7d6f1c3e8a4b9d2f5c7e0b3d6f9a2c5e8b1d4f7a0c3e6b9d2",
+        "timestamp": "2026-01-15T08:05:00Z",
+        "prev_state": "CAPABILITY_DISCOVERY",
+        "next_state": "ANCHOR_PROPOSED",
+        "event": "offer",
+        "transition_reason": "NORMAL",
+        "terms": {
+            "unit_price": "[REDACTED]",
+            "volume": "[REDACTED]",
+            "delivery_days": "[REDACTED]"
+        }
+    },
+    {
+        "event_id": "evt_0003",
+        "negotiation_id": "NEG-EXAMPLE-001",
+        "prev_hash": "b8e4d0f3c2e5a9b7d6f1c3e8a4b9d2f5c7e0b3d6f9a2c5e8b1d4f7a0c3e6b9d2",
+        "hash": "c9f5e1a4d3b6f0c8e7a2d5b9f1c4e7a0d3b6f9c2e5a8b1d4f7a0c3e6b9d2f5e8",
+        "timestamp": "2026-01-15T08:15:00Z",
+        "prev_state": "ANCHOR_PROPOSED",
+        "next_state": "NEGOTIATING",
+        "event": "counter_offer",
+        "transition_reason": "NORMAL",
+        "terms": {
+            "unit_price": "[REDACTED]",
+            "volume": "[REDACTED]",
+            "delivery_days": "[REDACTED]"
+        }
+    },
+    {
+        "event_id": "evt_0004",
+        "negotiation_id": "NEG-EXAMPLE-001",
+        "prev_hash": "c9f5e1a4d3b6f0c8e7a2d5b9f1c4e7a0d3b6f9c2e5a8b1d4f7a0c3e6b9d2f5e8",
+        "hash": "d0a6f2b5e4c7a1d9f3b6e8c1a4d7f0b3e6c9a2d5f8b1e4c7a0d3f6b9e2c5a8d1",
+        "timestamp": "2026-01-15T08:30:00Z",
+        "prev_state": "NEGOTIATING",
+        "next_state": "AGREEMENT_DRAFT",
+        "event": "accept",
+        "transition_reason": "NORMAL",
+        "terms": {
+            "unit_price": "[REDACTED]",
+            "volume": "[REDACTED]",
+            "delivery_days": "[REDACTED]"
+        }
+    },
+    {
+        "event_id": "evt_0005",
+        "negotiation_id": "NEG-EXAMPLE-001",
+        "prev_hash": "d0a6f2b5e4c7a1d9f3b6e8c1a4d7f0b3e6c9a2d5f8b1e4c7a0d3f6b9e2c5a8d1",
+        "hash": "e1b7a3c6f5d8b2e0a4c7f9b2d5e8a1c4f7b0d3e6a9c2f5b8e1d4a7c0f3b6e9d2",
+        "timestamp": "2026-01-15T09:00:00Z",
+        "prev_state": "AGREEMENT_DRAFT",
+        "next_state": "HUMAN_APPROVAL",
+        "event": "request_approval",
+        "transition_reason": "NORMAL",
+        "terms": {
+            "unit_price": "[REDACTED]",
+            "volume": "[REDACTED]",
+            "delivery_days": "[REDACTED]"
+        }
+    },
+    {
+        "event_id": "evt_0006",
+        "negotiation_id": "NEG-EXAMPLE-001",
+        "prev_hash": "e1b7a3c6f5d8b2e0a4c7f9b2d5e8a1c4f7b0d3e6a9c2f5b8e1d4a7c0f3b6e9d2",
+        "hash": "f2c8b4d7a6e9c3f1b5d8a0c3f6b9d2e5a8c1f4b7d0e3a6c9f2b5e8d1a4c7f0b3",
+        "timestamp": "2026-01-15T09:04:14Z",
+        "prev_state": "HUMAN_APPROVAL",
+        "next_state": "COMMIT",
+        "event": "approve",
+        "transition_reason": "NORMAL",
+        "terms": {
+            "unit_price": "[REDACTED]",
+            "volume": "[REDACTED]",
+            "delivery_days": "[REDACTED]"
+        },
+        "approval_token_id": "[REDACTED]"
+    }
+]
